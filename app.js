@@ -13,7 +13,7 @@ app.listen(port, () =>
   console.log(`Server is listening at http://localhost:${port}`)
 );
 //////////////////////////////////////////////////
-const User = require("./db/userModel");
+const User = require("./models/user");
 //connect our file dbconnect with appjs
 const dbConnect = require("./db/dbConnect");
 
