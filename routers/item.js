@@ -82,6 +82,22 @@ router.delete('/items/:id', Auth, async(req, res) => {
         res.status(400).send(error)
     }
 })
+////search 
+const searchItem = async(req,res)=>{
+    try{
+
+     var search = req.body.search;
+     var item_data = await Item.find({"name":{$regex:".*"+search+".*",$options:'i'}});
+     if(item_data.length>0){
+        res.status(200).send({ success:true,msg:"Item Details",data:item_data});
+     }else{
+        res.status(200).send({success:true,msg:"item not found!"});
+     }
+
+    } catch(error){
+        res.status(400).send({success:false,msg:error.message});
+    }
+}
 
 
 module.exports = router
