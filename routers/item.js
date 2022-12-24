@@ -99,5 +99,6 @@ const searchItem = async(req,res)=>{
     }
 }
 
+router.get('/item/:name',searchItem);
 
 module.exports = router
