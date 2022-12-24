@@ -5,15 +5,17 @@ const config = require('config');
 const stripe = require('stripe')(config.get('StripeAPIKey'));
 
 module.exports.get_orders = async (req,res) => {
-    const userId = req.params.id;
-    Order.find({userId}).sort({date:-1}).then(orders => res.json(orders));
+    //const userId = req.params.id;
+    const owner=req.user._id;
+    Order.find({owner}).sort({date:-1}).then(orders => res.json(orders));
 }
 
 module.exports.checkout = async (req,res) => {
     try{
         const userId = req.params.id;
+        const owner=req.user._id;
         const {source} = req.body;
-        let cart = await Cart.findOne({userId});
+        let cart = await Cart.findOne({owner});
         let user = await User.findOne({_id: userId});
         const email = user.email;
         if(cart){
