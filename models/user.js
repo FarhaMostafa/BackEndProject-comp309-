@@ -17,7 +17,7 @@ const userSchema=mongoose.Schema({
         unique:[true,"Email Exits"],
         validate( value ) {
             if( !validator.isEmail( value )) {
-                 throw new Error( "Email is invalid" )
+                 throw new Error( "Please enter a valid email" )
                   }
              }
     },
