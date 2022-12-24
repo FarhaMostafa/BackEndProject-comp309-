@@ -19,6 +19,7 @@ module.exports.checkout = async (req,res) => {
         let user = await User.findOne({_id: userId});
         const email = user.email;
         if(cart){
+            //strip is library
             const charge = await stripe.charges.create({
                 amount: cart.bill,
                 currency: 'inr',
@@ -26,6 +27,7 @@ module.exports.checkout = async (req,res) => {
                 receipt_email: email
             })
             if(!charge) throw Error('Payment failed');
+            
             if(charge){
                 const order = await Order.create({
                     userId,
