@@ -1,8 +1,9 @@
 const Order = require('../models/order');
-const Cart = require('../models/Cart');
-const User = require('../models/User');
-const config = require('config');
-const stripe = require('stripe')(config.get('StripeAPIKey'));
+const Cart = require('../models/cart');
+const User = require('../models/user');
+const config = require('../config/default');
+const stripe = require('stripe')
+//(config.get('StripeAPIKey'));
 
 module.exports.get_orders = async (req,res) => {
     //const userId = req.params.id;
