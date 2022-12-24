@@ -30,9 +30,10 @@ app.post('/login', (req, res) => {
     }
   
     login({ email, password })
-      .then(user => {
+      .then(async user => {
         console.log('user', user);
-        return res.status(200).send(user);
+        const token = await user.generateAuthToken();
+        return res.status(200).send({user,token});
       })
       .catch(err => {
         console.log(`err`, err.message);
@@ -54,15 +55,16 @@ app.post('/login', (req, res) => {
       });
   });
   
-  app.post('/register', (req, res) => {
+  app.post('/register',  (req, res) => {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
       return res.status(401).send({ error: "missing user data" });
     }
     addUsertoDB({ name, email, password })
-      .then(user => {
+      .then(async user => {
         console.log(`Added user`, user);
-        return res.status(200).send(user);
+        const token = await user.generateAuthToken();
+        return res.status(200).send({user,token});
       })
       .catch(err => {
         console.log(`err`, err);
