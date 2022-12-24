@@ -1,7 +1,8 @@
 const express = require('express');
-const cors = require('cors');
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
+const cors = require("cors");//allow us to make requests from our browser.
+const fs = require("fs");//to save the image in our server
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
@@ -106,6 +107,27 @@ app.post('/login', (req, res) => {
   app.get('/', (req, res) => {
     return res.status(200).send("OK");
   });
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //upload an image component
+  app.post("/",
+  bodyParser.raw({type: ["image/jpeg", "image/png"], limit: "5mb"}),
+  (req, res) => {
+    try {
+      console.log(req.body);
+      //save the image in our server
+      fs.writeFile("image.jpeg", req.body, (error) => {
+        if (error) {
+          throw error;
+        }
+      });
+
+      res.sendStatus(200);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  });
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   
 
 module.exports=app;
