@@ -22,16 +22,20 @@ const cartSchema = new mongoose.Schema({
        min: 1,
        default: 1},
        price: Number
-     }],
-     img:
-   {
-       data: Buffer,
-       contentType: String
-   },
+     }], 
+     img: {
+      type: String,
+      default: "",
+    },
+     role: {
+      type: Number,
+      default: 0,
+    },
      price: {
        type: Number,
        required: true
     },
+
     bill: {
         type: Number,
         required: true,

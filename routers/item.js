@@ -1,6 +1,6 @@
 const express = require('express')
 const Item = require('../models/item')
-const Auth = require('../middleware/auth')
+const AuthAdmin = require('../middleware/authAdmin')
 
 
 const router = new express.Router()
@@ -29,7 +29,7 @@ router.get('/items/:id', async(req, res) => {
 })
 
 //create an item
-router.post('/items',Auth, async(req, res) => {
+router.post('/items',AuthAdmin, async(req, res) => {
     try {
         const newItem = new Item({
             ...req.body,
@@ -45,7 +45,7 @@ router.post('/items',Auth, async(req, res) => {
 
 //update an item
 
-router.patch('/items/:id', Auth, async(req, res) => {
+router.patch('/items/:id', AuthAdmin, async(req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'description', 'category', 'price']
 
@@ -71,7 +71,7 @@ router.patch('/items/:id', Auth, async(req, res) => {
 })
 
 //delete item
-router.delete('/items/:id', Auth, async(req, res) => {
+router.delete('/items/:id', AuthAdmin, async(req, res) => {
     try {
         const deletedItem = await Item.findOneAndDelete( {_id: req.params.id} )
         if(!deletedItem) {

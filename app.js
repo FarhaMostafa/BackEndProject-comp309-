@@ -10,11 +10,13 @@ const bodyParser = require('body-parser');
 const itemRouter =require('./routers/item')
 const cartRouter = require('./routers/cart')
 const orderRoutes = require('./routers/order');
+const uploadRoutes = require('./routers/upload');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(cors());
 app.use(bodyParser.json());
 app.use(itemRouter);
 app.use(cartRouter);
+app.use(uploadRoutes);
 app.use('/api',orderRoutes);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //our port

@@ -16,11 +16,10 @@ const itemSchema=new mongoose.Schema({
         type: String,
         required: true
       },
-      img:
-    {
-        data: Buffer,
-        contentType: String
-    },
+      img: {
+        type: Object,
+        required: true,
+      },
       price: {
         type: Number,
         required: true
