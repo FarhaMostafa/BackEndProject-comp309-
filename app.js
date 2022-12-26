@@ -7,6 +7,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser');
+const fileUpload = require("express-fileupload");
 const itemRouter =require('./routers/item')
 const cartRouter = require('./routers/cart')
 const orderRoutes = require('./routers/order');
@@ -14,10 +15,16 @@ const uploadRoutes = require('./routers/upload');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(itemRouter);
 app.use(cartRouter);
 app.use(uploadRoutes);
 app.use('/api',orderRoutes);
+app.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //our port
 app.listen(port, () =>
