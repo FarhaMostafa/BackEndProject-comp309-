@@ -8,9 +8,8 @@ const mongoose = require("mongoose");
   .catch((err) => console.log(err));
 
 async function dbConnect() {
-  await mongoose.connect(process.env.BD_URL);
-  
+  await mongoose.connect(process.env.BD_URL,);
+ 
 }
-
 
 module.exports=dbConnect;
