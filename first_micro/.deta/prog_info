@@ -1,0 +1,1 @@
+{"id":"8ae73986-33ec-4494-987b-c18e194419ae","space":45815,"runtime":"nodejs14.x","name":"first_micro","path":"majx7t","project":"a0uepv5d","account":"144798365827","region":"eu-central-1","deps":["express@^4.18.2"],"envs":null,"public":true,"log_level":"off","cron":""}
