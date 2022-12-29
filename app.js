@@ -36,6 +36,20 @@ const User = require("./models/user");
 const dbConnect = require("./db/dbConnect");
 
 dbConnect();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Curb Cores Error by adding a header here
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //login and register function modyfying 
 // login endpoint
@@ -141,7 +155,7 @@ app.post("/login", (request, response) => {
           email: request.body.email,
           password: hashedPassword,
          
-          tokens:request.body.token,
+          
   
         });
   
